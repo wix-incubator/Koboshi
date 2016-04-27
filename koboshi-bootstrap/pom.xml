@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.wix.hoopoe.koboshi</groupId>
+        <artifactId>koboshi_2.11</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.wix.hoopoe.koboshi</groupId>
+    <artifactId>koboshi-boostrap_2.11</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Koboshi boostrap</name>
+    <description>Koboshi easy bootstrapping entry point</description>
+    <url>https://github.com/wix/koboshi</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <org.specs2.version>3.6.1</org.specs2.version>
+        <com.fasterxml.jackson.version>2.4.3</com.fasterxml.jackson.version>
+
+        <java.source.version>1.7</java.source.version>
+        <java.target.version>1.7</java.target.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+	    <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.joda</groupId>
+            <artifactId>joda-convert</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency> -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_${scala.dependencies.version}</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-junit4</artifactId>
+            <version>2.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-core_${scala.dependencies.version}</artifactId>
+            <version>${org.specs2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-junit_${scala.dependencies.version}</artifactId>
+            <version>${org.specs2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-mock_${scala.dependencies.version}</artifactId>
+            <version>${org.specs2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.wix.hoopoe.http</groupId> 
+            <artifactId>http-testkit_${scala.dependencies.version}</artifactId>
+            <version>0.0.1</version>
+            <scope>test</scope>
+        </dependency>
+         <dependency>
+            <groupId>com.github.pathikrit</groupId>
+            <artifactId>better-files_${scala.dependencies.version}</artifactId>
+            <scope>test</scope>
+            <version>2.14.0</version>
+        </dependency>
+   </dependencies>
+</project>
