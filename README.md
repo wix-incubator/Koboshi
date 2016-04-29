@@ -15,8 +15,10 @@ Koboshi makes sure that:
 
 **NOTE:** As this is a work-in-progress, and is being changed as we get feedback from users, some interfaces might change or be removed at later versions.
 
-### Maven
+### Scala binary compatibility
 This library is currently only published for Scala 2.11.x:
+
+### Maven
 
 ```xml
 <dependency>
@@ -24,6 +26,12 @@ This library is currently only published for Scala 2.11.x:
     <artifactId>koboshi-bootstrap_2.11</artifactId>
     <version>0.0.1</version>
 </dependency>
+```
+
+### SBT
+
+```scala
+libraryDependencies += "com.wix.hoopoe.koboshi" % "koboshi-bootstrap_2.11" % "0.0.1"
 ```
 
 ### Usage
