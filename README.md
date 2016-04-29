@@ -16,6 +16,7 @@ Koboshi makes sure that:
 **NOTE:** As this is a work-in-progress, and is being changed as we get feedback from users, some interfaces might change or be removed at later versions.
 
 ### Maven
+This library is currently only published for Scala 2.11.x:
 
 ```xml
 <dependency>
