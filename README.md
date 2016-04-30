@@ -32,7 +32,7 @@ This library is currently only published for Scala 2.11.x:
 import com.wix.hoopoe.koboshi.cache.defaults.ResilientCaches
 ...
 case class YourData(data: Seq[String])
-val resilientCaches = ResilientCaches.resilientCaches(youCacheFolder)
+val resilientCaches = ResilientCaches.resilientCaches(yourCacheFolder)
 val resilientCache = resilientCaches.aResilientInitializedCache[YourData](
      new RemoteDataSource[YourData] {
         override def fetch(): YourData = ??? //e.g. read from a remote service
