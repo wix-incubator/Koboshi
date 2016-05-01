@@ -21,7 +21,7 @@ This library is currently only published for Scala 2.11.x:
 ```xml
 <dependency>
     <groupId>com.wix.hoopoe.koboshi</groupId>
-    <artifactId>koboshi-boostrap_2.11</artifactId>
+    <artifactId>koboshi-bootstrap_2.11</artifactId>
     <version>0.0.1</version>
 </dependency>
 ```
