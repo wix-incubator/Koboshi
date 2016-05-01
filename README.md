@@ -15,25 +15,6 @@ Koboshi makes sure that:
 
 **NOTE:** As this is a work-in-progress, and is being changed as we get feedback from users, some interfaces might change or be removed at later versions.
 
-### Scala binary compatibility
-This library is currently only published for Scala 2.11.x:
-
-### Maven
-
-```xml
-<dependency>
-    <groupId>com.wix.hoopoe.koboshi</groupId>
-    <artifactId>koboshi-bootstrap_2.11</artifactId>
-    <version>0.0.1</version>
-</dependency>
-```
-
-### SBT
-
-```scala
-libraryDependencies += "com.wix.hoopoe.koboshi" % "koboshi-bootstrap_2.11" % "0.0.1"
-```
-
 ### Usage
 
 ```scala
@@ -49,6 +30,25 @@ val yourData: YourData = resilientCache.read()
 ```
 
 See all features in the [acceptance test](koboshi-bootstrap/src/it/java/com/wix/hoopoe/koboshi/ResilientCachesIT.scala).
+
+### Maven (pending publication)
+
+```xml
+<dependency>
+    <groupId>com.wix.hoopoe.koboshi</groupId>
+    <artifactId>koboshi-bootstrap_2.11</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
+### SBT (pending publication)
+
+```scala
+libraryDependencies += "com.wix.hoopoe.koboshi" % "koboshi-bootstrap_2.11" % "0.0.1"
+```
+
+### Scala binary compatibility
+This library is currently only published for Scala 2.11.x:
 
 ## License
 
