@@ -4,7 +4,7 @@
 
     <groupId>com.wix.hoopoe.koboshi</groupId>
     <artifactId>koboshi_2.11</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Koboshi aggregator and parent</name>
     <description>Koboshi aggregator and parent</description>
@@ -34,7 +34,7 @@
         <url>https://github.com/wix/koboshi</url>
         <connection>scm:git:git://github.com/wix/koboshi.git</connection>
         <developerConnection>scm:git:git@github.com:wix/koboshi.git</developerConnection>
-        <tag>koboshi_2.11-0.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
