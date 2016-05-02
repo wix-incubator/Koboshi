@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.wix.hoopoe.koboshi</groupId>
         <artifactId>koboshi_2.11</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.2</version>
     </parent>
 
     <groupId>com.wix.hoopoe.koboshi</groupId>
     <artifactId>koboshi-bootstrap_2.11</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>Koboshi bootstrap</name>
     <description>Koboshi easy bootstrapping entry point</description>
     <url>https://github.com/wix/koboshi</url>
