@@ -31,7 +31,7 @@ val yourData: YourData = resilientCache.read()
 
 See all features in the [acceptance test](koboshi-bootstrap/src/it/java/com/wix/hoopoe/koboshi/ResilientCachesIT.scala).
 
-### Maven (pending publication)
+### Maven
 
 ```xml
 <dependency>
@@ -41,7 +41,7 @@ See all features in the [acceptance test](koboshi-bootstrap/src/it/java/com/wix/
 </dependency>
 ```
 
-### SBT (pending publication)
+### SBT
 
 ```scala
 libraryDependencies += "com.wix.hoopoe.koboshi" % "koboshi-bootstrap_2.11" % "0.0.3"
