@@ -19,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <org.specs2.version>3.6.1</org.specs2.version>
+        <org.specs2.version>3.7</org.specs2.version>
         <com.fasterxml.jackson.version>2.4.3</com.fasterxml.jackson.version>
 
         <java.source.version>1.7</java.source.version>
