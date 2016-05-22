@@ -28,6 +28,7 @@ val resilientCache = resilientCaches.aResilientInitializedCache[YourData](
       })
 val yourData: YourData = resilientCache.read()
 ```
+**NOTE:** It is advised not to use collections (Map, List, etc') directly as DTO but rather encapsulate those in your own class as shown in the example above (YourData). This will allow better support for backward/forward compatability which otheriwse will be compromised, leaving the local cached copy unparsable upon a change in the DTO.
 
 See all features in the [acceptance test](koboshi-bootstrap/src/it/java/com/wix/hoopoe/koboshi/ResilientCachesIT.scala).
 
