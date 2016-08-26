@@ -28,8 +28,10 @@ val resilientCache = resilientCaches.aResilientInitializedCache[YourData](
       })
 val yourData: YourData = resilientCache.read()
 ```
-**NOTE:** It is advised not to use collections (Map, List, etc') directly as DTO but rather encapsulate those in your own class as shown in the example above (YourData). This will allow better support for backward/forward compatability which otherwise will be compromised, leaving the local cached copy unparsable upon a change in the DTO.
-Also, make sure the DTO is serializable. It is by default when using Scala's case classes, but if you're using Java make sure to include an empty constructor and getters.
+**NOTE:** 
+By default Koboshi uses [Jackson]() for working with the persistent copy.
+It is advised not to use collections (Map, List, etc') directly as a DTO but rather encapsulate those in your own class as shown in the example above (YourData). This will allow better support for backward/forward compatability which otherwise will be compromised, leaving the local cached copy unparsable upon a change in the DTO.
+Also, make sure the DTO is serializable. Koboshi supports Scala's case classes out of the box, but if you're using something else (Java for example) make sure to include an empty constructor and getters or other Jackson constructs (annotate with a custom @JSonCreator or @JsonDeserialize).
 
 See all features in the [acceptance test](koboshi-bootstrap/src/it/java/com/wix/hoopoe/koboshi/ResilientCachesIT.scala).
 
