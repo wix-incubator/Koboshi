@@ -102,16 +102,6 @@ public class BlockingRemoteDataFetcherTest {
         blockingRemoteDataFetcher.init();
     }
 
-    @Test
-    public void initializationFromDiskQueryReturnsTrueIfDataExistsInPersistentCache() {
-        setupPersistentCacheWith(INITIAL_LOCAL_DATA);
-        context.checking(new Expectations() {{
-            ignoring(transientCache);
-        }});
-        blockingRemoteDataFetcher.init();
-        assertThat(blockingRemoteDataFetcher.hasInitializedFromDisk(), is(true));
-    }
-
     @Test(expected = IllegalStateException.class)
     public void shouldInitOnlyOnce() throws IOException {
         setupEmptyPersistentCache();
@@ -184,7 +174,7 @@ public class BlockingRemoteDataFetcherTest {
     }
 
     @Test
-    public void initializationFromRemoteQueryReturnsTrueIfSuccessfullyRetrievedDataFromRemote() throws IOException {
+    public void hasSyncedWithRemoteReturnsTrueIfSuccessfullyRetrievedDataFromRemoteOnInit() throws IOException {
         setupEmptyPersistentCache();
         setupRemoteToReturn(SOME_DATA_TYPE);
         ignoreReporter();
@@ -195,18 +185,32 @@ public class BlockingRemoteDataFetcherTest {
         }});
 
         blockingRemoteDataFetcher.init();
-        assertThat(blockingRemoteDataFetcher.hasInitializedFromRemote(), is(true));
+        assertThat(blockingRemoteDataFetcher.hasSyncedWithRemote(), is(true));
     }
 
     @Test
-    public void initializationFromRemoteQueryReturnsFalseIfFailingToRetrieveFromRemote() throws IOException {
+    public void hasSyncedWithRemoteReturnsFalseIfFailingToRetrievedDataFromRemoteOnInit() throws IOException {
         setupEmptyPersistentCache();
         setupFailureToFetchFromRemote();
         ignoreTransientCache();
         ignoreReporter();
 
         blockingRemoteDataFetcher.init();
-        assertThat(blockingRemoteDataFetcher.hasInitializedFromRemote(), is(false));
+        assertThat(blockingRemoteDataFetcher.hasSyncedWithRemote(), is(false));
+    }
+
+    @Test
+    public void hasSyncedWithRemoteReturnsTrueIfSuccessfullyRetrievedDataFromRemoteDuringSyncFetching() throws IOException {
+        setupRemoteToReturn(SOME_DATA_TYPE);
+        ignoreReporter();
+
+        context.checking(new Expectations() {{
+            ignoring(transientCache);
+            ignoring(persistentCache);
+        }});
+
+        blockingRemoteDataFetcher.fetchNow();
+        assertThat(blockingRemoteDataFetcher.hasSyncedWithRemote(), is(true));
     }
 
     private void ignoreTransientCache() {

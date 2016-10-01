@@ -6,7 +6,7 @@ import com.wix.hoopoe.koboshi.namespace.NamespaceCreator._
 import com.wix.hoopoe.koboshi.registry.RemoteDataFetcherRegistry
 import com.wix.hoopoe.koboshi.remote.RemoteDataSource
 import com.wix.hoopoe.koboshi.report.Reporters
-import com.wix.hoopoe.koboshi.scheduler.{Clock, Schedulers}
+import com.wix.hoopoe.koboshi.scheduler.{Clock, Schedulers, SchedulingDelays}
 
 import scala.reflect.ClassTag
 
@@ -38,7 +38,8 @@ class CustomizableResilientCaches(remoteDataFetcherRegistry: RemoteDataFetcherRe
         persistentCaches,
         schedulers,
         clock,
-        marshallers))
+        marshallers,
+        SchedulingDelays()))
 
   def stop(): Unit = remoteDataFetcherRegistry.foreach(_.close())
 }

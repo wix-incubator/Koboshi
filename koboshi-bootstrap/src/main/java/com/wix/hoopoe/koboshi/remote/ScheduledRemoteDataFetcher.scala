@@ -1,76 +1,62 @@
 package com.wix.hoopoe.koboshi.remote
 
-import java.util.concurrent.{ScheduledExecutorService, ScheduledFuture, TimeUnit}
 import java.util.concurrent.atomic.AtomicBoolean
+import java.util.concurrent.{ScheduledExecutorService, ScheduledFuture, TimeUnit}
 
-import com.wix.hoopoe.koboshi.remote.ScheduledRemoteDataFetcher._
 import com.wix.hoopoe.koboshi.report.RemoteDataFetchingReporter
+import com.wix.hoopoe.koboshi.scheduler.SchedulingDelays
+
+import scala.concurrent.duration.FiniteDuration
 
 /**
- * @author ittaiz
- * @since 6/25/13
- */
-object ScheduledRemoteDataFetcher {
-  private val NoDelaySinceStaleFromDisk = 0
-  private val UpToDateFetchInterval = 5
-  private val StaleOrMissingFetchInterval = 1
-}
-
-class ScheduledRemoteDataFetcher[T](scheduler: ScheduledExecutorService, underlyingRemoteDataFetcher: RemoteDataFetcher[T], remoteDataFetchingReporter: RemoteDataFetchingReporter) extends RemoteDataFetcher[T] {
-  private val initialized: AtomicBoolean = new AtomicBoolean
-  private val scheduledRunCompletedSuccessfullyAtLeastOnce: AtomicBoolean = new AtomicBoolean
-  private var initializationScheduledFuture: ScheduledFuture[_] = null
+  * @author ittaiz
+  * @since 6/25/13
+  */
+class ScheduledRemoteDataFetcher[T](scheduler: ScheduledExecutorService,
+                                    schedulingDelays: SchedulingDelays,
+                                    underlyingRemoteDataFetcher: RemoteDataFetcher[T],
+                                    remoteDataFetchingReporter: RemoteDataFetchingReporter) extends RemoteDataFetcher[T] {
+  private val initialized = new AtomicBoolean
 
   def init(): Unit = {
     assertHasNotInitializedAlready()
     underlyingRemoteDataFetcher.init()
-    initializationScheduledFuture = scheduleRun
+    scheduleFirstRun()
   }
-
-  private def scheduleRun: ScheduledFuture[_] =
-    scheduler.scheduleAtFixedRate(new RunningFetcher(), initialDelay, fetchInterval, TimeUnit.MINUTES)
-
-  private def fetchInterval: Int =
-    if (hasInitializedFromRemote) UpToDateFetchInterval else StaleOrMissingFetchInterval
 
   private def assertHasNotInitializedAlready(): Unit =
     if (!initialized.compareAndSet(false, true)) throw new IllegalStateException("cannot init twice")
 
-  private def initialDelay: Int =
-    if (underlyingRemoteDataFetcher.hasInitializedFromDisk || !underlyingRemoteDataFetcher.hasInitializedFromRemote)
-      NoDelaySinceStaleFromDisk
-    else
-      UpToDateFetchInterval
+  private def scheduleFirstRun(): ScheduledFuture[_] =
+    scheduleWithDelay(schedulingDelays.initialDelay(hasSyncedWithRemote))
+
+  private def scheduleNextRun(): ScheduledFuture[_] =
+    scheduleWithDelay(schedulingDelays.nextFetchDelay(hasSyncedWithRemote))
+
+  private def scheduleWithDelay(delay: FiniteDuration): ScheduledFuture[_] =
+    scheduler.schedule(RunningFetcher, delay.toMillis, TimeUnit.MILLISECONDS)
 
   def close(): Unit = {
     remoteDataFetchingReporter.initiatingShutdown()
-    scheduler.shutdownNow
+    scheduler.shutdownNow()
   }
 
   def fetchNow(): Unit = underlyingRemoteDataFetcher.fetchNow()
 
-  def hasInitializedFromDisk: Boolean = underlyingRemoteDataFetcher.hasInitializedFromDisk
+  def hasSyncedWithRemote: Boolean = underlyingRemoteDataFetcher.hasSyncedWithRemote
 
-  def hasInitializedFromRemote: Boolean =
-    underlyingRemoteDataFetcher.hasInitializedFromRemote || scheduledRunCompletedSuccessfullyAtLeastOnce.get
-
-  private class RunningFetcher extends Runnable {
+  private object RunningFetcher extends Runnable {
     def run(): Unit = {
       try {
         remoteDataFetchingReporter.attemptingToFetchFromRemote()
         underlyingRemoteDataFetcher.fetchNow()
-        if (!initializedWithData && isFirstSuccessfulScheduledRun) {
-          initializationScheduledFuture.cancel(true)
-          scheduleRun
-        }
       } catch {
         case e: Exception =>
           remoteDataFetchingReporter.cannotCompleteFetchingFromRemote(e)
+      } finally {
+        scheduleNextRun()
       }
     }
   }
 
-  private def isFirstSuccessfulScheduledRun: Boolean = scheduledRunCompletedSuccessfullyAtLeastOnce.compareAndSet(false, true)
-
-  private def initializedWithData: Boolean = hasInitializedFromDisk || hasInitializedFromRemote
 }

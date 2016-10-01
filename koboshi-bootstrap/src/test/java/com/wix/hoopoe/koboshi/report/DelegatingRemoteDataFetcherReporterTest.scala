@@ -1,5 +1,7 @@
 package com.wix.hoopoe.koboshi.report
 
+import java.io.File
+
 import org.specs2.mock.Mockito
 import org.specs2.mutable.SpecificationWithJUnit
 import org.specs2.specification.Scope
@@ -51,6 +53,23 @@ class DelegatingRemoteDataFetcherReporterTest extends SpecificationWithJUnit wit
       underlyingReporters.foreach(reporter => there was one(reporter).initiatingShutdown())
     }
 
+    "delegate a readFromPersistentCache call to its underlying reporters" in new DelegatingReporterScope with CacheReporting {
+      delegatingReporter.readFromPersistentCache(CACHE_URI, CONTENT)
+
+      underlyingReporters.foreach(reporter => there was one(reporter).readFromPersistentCache(CACHE_URI, CONTENT))
+    }
+
+    "delegate a writeToPersistentCache call to its underlying reporters" in new DelegatingReporterScope with CacheReporting {
+      delegatingReporter.writeToPersistentCache(CACHE_URI, CONTENT)
+
+      underlyingReporters.foreach(reporter => there was one(reporter).writeToPersistentCache(CACHE_URI, CONTENT))
+    }
+
+  }
+
+  trait CacheReporting {
+      val CONTENT = "CONTENT".getBytes
+      val CACHE_URI = new File("IRRELEVANT").toURI
   }
 
 }

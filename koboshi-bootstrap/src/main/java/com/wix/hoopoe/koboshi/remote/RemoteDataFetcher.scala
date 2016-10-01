@@ -7,7 +7,5 @@ trait RemoteDataFetcher[T] extends AutoCloseable {
 
   def close(): Unit
 
-  def hasInitializedFromDisk: Boolean
-
-  def hasInitializedFromRemote: Boolean
+  def hasSyncedWithRemote: Boolean
 }

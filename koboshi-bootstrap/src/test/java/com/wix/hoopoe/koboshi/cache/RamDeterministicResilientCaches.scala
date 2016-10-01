@@ -15,7 +15,7 @@ class RamDeterministicResilientCaches(val remoteDataFetcherRegistry: MapBasedRem
     new FixedReporterReporters(reporter),
     new PersistentCaches(){
     //when we'll need access to it we'll probably need to introduce a map of (namespace,class[T])=>RamPersistentCache[T] and add to it every time this method is called
-      override def aPersistentCache[T](namespace: String, marshaller: Marshaller[T]): PersistentCache[T] = new RamPersistentCache[T]
+      override def aPersistentCache[T](namespace: String, marshaller: Marshaller[T], reporter: RemoteDataFetchingReporter): PersistentCache[T] = new RamPersistentCache[T]
     },
     new JacksonMarshallers(objectMapper),
     new FakeClock) {

@@ -5,14 +5,9 @@ import java.nio.file.{Files, Path}
 
 import com.wix.hoopoe.koboshi.cache.TimestampedData
 import com.wix.hoopoe.koboshi.marshaller.Marshaller
-import com.wix.hoopoe.koboshi.report.PersistenceException
-import org.slf4j.{Logger, LoggerFactory}
+import com.wix.hoopoe.koboshi.report.{PersistenceException, RemoteDataFetchingReporter}
 
-object DiskCache {
-  private val logger: Logger = LoggerFactory.getLogger("diskCache")
-}
-
-class DiskCache[T](diskCache: Path, marshaller: Marshaller[T]) extends PersistentCache[T] {
+class DiskCache[T](diskCache: Path, marshaller: Marshaller[T], reporter: RemoteDataFetchingReporter) extends PersistentCache[T] {
 
   override def readTimestamped(): TimestampedData[T] = {
     try {
@@ -20,7 +15,7 @@ class DiskCache[T](diskCache: Path, marshaller: Marshaller[T]) extends Persisten
         return null.asInstanceOf[TimestampedData[T]]
       }
       val marshalledLocalData = Files.readAllBytes(diskCache)
-      report("read", marshalledLocalData)
+      reporter.readFromPersistentCache(diskCache.toUri, marshalledLocalData)
       marshaller.unmarshall(marshalledLocalData)
     }
     catch {
@@ -32,7 +27,7 @@ class DiskCache[T](diskCache: Path, marshaller: Marshaller[T]) extends Persisten
   override def write(timestampedData: TimestampedData[T]): Unit = {
     try {
       val marshalledLocalData = marshaller.marshall(timestampedData)
-      report("writing", marshalledLocalData)
+      reporter.writeToPersistentCache(diskCache.toUri, marshalledLocalData)
       Files.write(diskCache, marshalledLocalData)
     }
     catch {
@@ -41,9 +36,4 @@ class DiskCache[T](diskCache: Path, marshaller: Marshaller[T]) extends Persisten
     }
   }
 
-  private def report(action: String, marshalledLocalData: Array[Byte]): Unit = {
-    if (DiskCache.logger.isTraceEnabled) {
-      DiskCache.logger.trace(action + " " + marshalledLocalData.length + " number of chars using " + diskCache)
-    }
-  }
 }

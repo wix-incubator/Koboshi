@@ -7,7 +7,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 
 import static com.wix.hoopoe.koboshi.RemoteDataFetchingLogDriver.aRemoteDataFetchingLogDriver;
 import static org.hamcrest.CoreMatchers.is;
@@ -19,6 +21,8 @@ import static org.hamcrest.CoreMatchers.is;
 public class LoggingRemoteDataFetchingReporterTest {
 
     private static final String DATA_TYPE = String.class.getName();
+    private static final byte[] CONTENT = "CONTENT".getBytes();
+    private static final URI CACHE_URI = new File("IRRELEVANT").toURI();
     private RemoteDataFetchingLogDriver remoteDataFetchingLogDriver;
     private LoggingRemoteDataFetchingReporter loggingRemoteDataFetchingReporter;
 
@@ -79,6 +83,20 @@ public class LoggingRemoteDataFetchingReporterTest {
         loggingRemoteDataFetchingReporter.initiatingShutdown();
 
         remoteDataFetchingLogDriver.reports(Level.INFO, is("initiating shutdown for " + DATA_TYPE));
+    }
+
+    @Test
+    public void logsPersistentCacheReadAttemptMessage() {
+        loggingRemoteDataFetchingReporter.readFromPersistentCache(CACHE_URI, CONTENT);
+
+        remoteDataFetchingLogDriver.reports(Level.TRACE, is("read "+CONTENT.length+" bytes using " + CACHE_URI));
+    }
+
+    @Test
+    public void logsPersistentCacheWriteAttemptMessage() {
+        loggingRemoteDataFetchingReporter.writeToPersistentCache(CACHE_URI, CONTENT);
+
+        remoteDataFetchingLogDriver.reports(Level.TRACE, is("writing "+CONTENT.length+" bytes using " + CACHE_URI));
     }
 
 }
