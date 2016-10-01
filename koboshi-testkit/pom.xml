@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+        <parent>
+        <groupId>com.wix.hoopoe.koboshi</groupId>
+        <artifactId>koboshi_2.11</artifactId>
+        <version>0.0.4-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.wix.hoopoe.koboshi</groupId>
+    <artifactId>koboshi-testkit_2.11</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <name>Koboshi Testkit</name>
+    <description>Koboshi IT/E2E Testkit</description>
+    <url>https://github.com/wix/koboshi</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <org.specs2.version>3.7</org.specs2.version>
+        <com.fasterxml.jackson.version>2.4.3</com.fasterxml.jackson.version>
+
+        <java.source.version>1.7</java.source.version>
+        <java.target.version>1.7</java.target.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wix.hoopoe.koboshi</groupId>
+            <artifactId>koboshi-bootstrap_2.11</artifactId>
+            <version>0.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wix.hoopoe.http</groupId> 
+            <artifactId>http-testkit_${scala.dependencies.version}</artifactId>
+            <version>0.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-core_${scala.dependencies.version}</artifactId>
+            <version>${org.specs2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-junit_${scala.dependencies.version}</artifactId>
+            <version>${org.specs2.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

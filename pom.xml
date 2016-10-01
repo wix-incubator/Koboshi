@@ -60,6 +60,7 @@
     </distributionManagement>
     <modules>
       <module>koboshi-bootstrap</module>
+      <module>koboshi-testkit</module>
     </modules>
     <build>
         <plugins>
