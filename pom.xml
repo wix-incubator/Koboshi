@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wix.hoopoe.koboshi</groupId>
@@ -44,6 +45,11 @@
         <scala.dependencies.version>2.11</scala.dependencies.version>
         <scala.library.version>2.11.7</scala.library.version>
 
+        <org.specs2.version>3.7</org.specs2.version>
+        <com.fasterxml.jackson.version>2.4.3</com.fasterxml.jackson.version>
+        <org.eclipse.jetty.version>9.1.2.v20140210</org.eclipse.jetty.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+
         <java.source.version>1.7</java.source.version>
         <java.target.version>1.7</java.target.version>
     </properties>
@@ -59,8 +65,9 @@
         </repository>
     </distributionManagement>
     <modules>
-      <module>koboshi-bootstrap</module>
-      <module>koboshi-testkit</module>
+        <module>koboshi-bootstrap</module>
+        <module>koboshi-testkit</module>
+        <module>servlet-modules</module>
     </modules>
     <build>
         <plugins>
@@ -150,7 +157,13 @@
                 <configuration>
                     <additionalClasspathElements>
                         <additionalClasspathElement>src/it/java</additionalClasspathElement>
+                        <additionalClasspathElement>src/e2e/java</additionalClasspathElement>
                     </additionalClasspathElements>
+                    <includes>
+                        <!-- for some reason *.scala is ignored, tests are actually scala (apart from one java)-->
+                        <include>**/*IT.java</include>
+                        <include>**/*E2E.java</include>
+                    </includes>
                 </configuration>
                 <executions>
                     <execution>
@@ -176,7 +189,7 @@
                         <configuration>
                             <sources>
                                 <source>src/it/java</source>
-                                <source>src/it/scala</source>
+                                <source>src/e2e/java</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -193,6 +206,31 @@
             <version>${scala.library.version}</version>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-webapp</artifactId>
+                <version>${org.eclipse.jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.specs2</groupId>
+                <artifactId>specs2-core_${scala.dependencies.version}</artifactId>
+                <version>${org.specs2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.specs2</groupId>
+                <artifactId>specs2-junit_${scala.dependencies.version}</artifactId>
+                <version>${org.specs2.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <profiles>
         <profile>

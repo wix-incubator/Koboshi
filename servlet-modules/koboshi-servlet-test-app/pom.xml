@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>koboshi_2.11</artifactId>
+        <groupId>com.wix.hoopoe.koboshi</groupId>
+        <version>0.0.4-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wix.hoopoe.koboshi</groupId>
+    <artifactId>koboshi-servlet-test-app_2.11</artifactId>
+    <version>0.0.4-SNAPSHOT</version>
+    <name>Koboshi Servlet Test App</name>
+    <description>Koboshi Servlet Test App</description>
+    <url>https://github.com/wix/koboshi</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wix.hoopoe.koboshi</groupId>
+            <artifactId>koboshi-bootstrap_2.11</artifactId>
+            <version>0.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-core_${scala.dependencies.version}</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.specs2</groupId>
+            <artifactId>specs2-junit_${scala.dependencies.version}</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.wix.hoopoe.http</groupId>
+            <artifactId>http-testkit_2.11</artifactId>
+            <version>0.0.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+</project>
