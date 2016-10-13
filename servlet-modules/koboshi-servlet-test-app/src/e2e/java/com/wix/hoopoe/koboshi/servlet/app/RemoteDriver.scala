@@ -15,13 +15,20 @@ class RemoteDriver {
 
   private val fakeRemote: EmbeddedHttpProbe = createFakeRemote()
   private val objectMapper = new ObjectMapper().registerModule(DefaultScalaModule)
+  @volatile
+  private var foo = new Foo("initial")
 
   private def createFakeRemote() = {
     val probe = new EmbeddedHttpProbe
     probe.handlers += {
       case HttpRequest(_, _, _, _, _) =>
-        HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, objectMapper.writeValueAsBytes(new Foo("initial"))))
+        HttpResponse(entity = HttpEntity(ContentTypes.`application/json`, objectMapper.writeValueAsBytes(foo)))
     }
     probe
   }
+
+  def respondWith(newFoo: Foo): Unit = {
+    foo = newFoo
+  }
+
 }

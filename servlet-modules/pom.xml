@@ -11,6 +11,7 @@
 
     <modules>
         <module>koboshi-servlet-test-app</module>
+        <module>koboshi-servlet</module>
     </modules>
 
 </project>

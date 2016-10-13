@@ -1,5 +1,7 @@
 package com.wix.hoopoe.koboshi.servlet.app
 
+import java.net.URL
+
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.wix.hoopoe.koboshi.app.domain.Foo
@@ -16,6 +18,8 @@ class AppDriver(env: EmbeddedEnvironment) {
     val foo = objectMapper.readValue(cnx.getInputStream, classOf[Foo])
     foo
   }
+
+  def address: URL = server.getURI.toURL
 
   def start(): Unit = {
     context.setAttribute("remote.port", env.remoteDriver.port)

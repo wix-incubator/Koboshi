@@ -12,4 +12,16 @@
         <servlet-name>foo</servlet-name>
         <url-pattern>/foo</url-pattern>
     </servlet-mapping>
+
+    <!-- You need this in your web.xml-->
+    <servlet>
+        <servlet-name>koboshiRegistry</servlet-name>
+        <servlet-class>com.wix.hoopoe.koboshi.servlet.ResilientCacheRegistryEndpoint</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>koboshiRegistry</servlet-name>
+        <url-pattern>/koboshi/*</url-pattern>
+    </servlet-mapping>
 </web-app>

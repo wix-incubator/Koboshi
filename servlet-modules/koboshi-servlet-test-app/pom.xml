@@ -18,9 +18,15 @@
     <url>https://github.com/wix/koboshi</url>
 
     <dependencies>
+        <!-- What you need in your servlet based app -->
         <dependency>
             <groupId>com.wix.hoopoe.koboshi</groupId>
             <artifactId>koboshi-bootstrap_2.11</artifactId>
+            <version>0.0.4-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wix.hoopoe.koboshi</groupId>
+            <artifactId>koboshi-servlet_2.11</artifactId>
             <version>0.0.4-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -28,6 +34,13 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.wix.hoopoe.koboshi</groupId>
+            <artifactId>koboshi-testkit_2.11</artifactId>
+            <version>0.0.4-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- End of What you need in your servlet based app -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
