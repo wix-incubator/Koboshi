@@ -4,13 +4,13 @@
     <parent>
         <groupId>com.wix.hoopoe.koboshi</groupId>
         <artifactId>koboshi_2.11</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.5-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>com.wix.hoopoe.koboshi</groupId>
     <artifactId>koboshi-servlet_2.11</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <name>Koboshi Servlet</name>
     <description>Koboshi Servlet</description>
     <url>https://github.com/wix/koboshi</url>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.wix.hoopoe.koboshi</groupId>
             <artifactId>koboshi-bootstrap_2.11</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
