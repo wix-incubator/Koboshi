@@ -5,11 +5,11 @@
     <parent>
         <groupId>com.wix.hoopoe.koboshi</groupId>
         <artifactId>koboshi_2.11</artifactId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.4</version>
     </parent>
     <groupId>com.wix.hoopoe.koboshi</groupId>
     <artifactId>koboshi-servlet-modules_2.11</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.4</version>
     <packaging>pom</packaging>
     <name>Koboshi Servlet Modules aggregator</name>
     <description>Koboshi Servlet Modules aggregator</description>
