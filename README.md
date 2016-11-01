@@ -41,14 +41,14 @@ See all features in the [acceptance test](koboshi-bootstrap/src/it/java/com/wix/
 <dependency>
     <groupId>com.wix.hoopoe.koboshi</groupId>
     <artifactId>koboshi-bootstrap_2.11</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
 ### SBT
 
 ```scala
-libraryDependencies += "com.wix.hoopoe.koboshi" % "koboshi-bootstrap_2.11" % "0.0.3"
+libraryDependencies += "com.wix.hoopoe.koboshi" % "koboshi-bootstrap_2.11" % "0.0.4"
 ```
 
 ### Scala binary compatibility
