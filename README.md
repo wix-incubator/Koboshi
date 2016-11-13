@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/wix/Koboshi.svg?branch=master)](https://travis-ci.org/wix/Koboshi)
 # Koboshi
 A library we use extensively at Wix for resilient caching of any configuration/resources that a service may need to rely on, but are obtained from an
 unreliable source (such as other internal services, databases, or any other remote source).
